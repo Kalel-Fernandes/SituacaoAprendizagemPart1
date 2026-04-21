@@ -24,15 +24,19 @@
             <div class="createTask">
                 <div class="form">
                     <label>Nome da Tarefa</label>
-                    <input type="text" id="name-task" placeholder="Escreva o nome aqui">
+                    <input type="text" id="taskName" placeholder="Escreva o nome aqui">
                 </div>
                 <div class="form">
                     <label>Horas Estimadas</label>
-                    <input type="number" step="0.01" id="hours" placeholder="0.0">
+                    <input type="number" step="0.01" id="taskHours" placeholder="0.0">
                 </div>
                 <div class="form">
                     <label>Valor por Hora</label>
                     <input type="number" id="hourly-rate" placeholder="0.00">
+                </div>
+                <div class="form">
+                    <label>Imposto</label>
+                    <input type="text" id="tax" placeholder="0%">
                 </div>
                 <button type="button" onclick="addTask()">Criar +</button>
             </div>
@@ -44,11 +48,12 @@
             </div>
             <div class="totalHoras">
                 <p>Total Horas</p>
-                <span id="out-totalHours"></span>
+                <span id="out-hours"></span>
             </div>
         </section>
-        <section id="activeTasks" class="hidden">
+        <section id="activeTasks">
             <h3>Tarefas Ativas</h3>
+            <ul id="taskList"></ul>
         </section>
     </main>
     <footer>

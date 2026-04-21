@@ -120,6 +120,10 @@ button:hover {
 }
 
 /* RESULTADOS */
+.hidden {
+    display: none !important;
+}
+
 #result {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
