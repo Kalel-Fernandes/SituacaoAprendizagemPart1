@@ -6,15 +6,32 @@ function addTask() {
     const hourInput = document.getElementById('taskHours');
     const hourlyRateInput = document.getElementById('hourly-rate');
     const tax = document.getElementById('tax');
-    const cost = (parseFloat(hourInput.value) * parseFloat(hourlyRateInput.value)) * (1 + parseFloat(tax.value)/100);
+    let cost = (parseFloat(hourInput.value) * parseFloat(hourlyRateInput.value)) * (1 + parseFloat(tax.value)/100);
+    const urgencyInput = document.getElementById('urgency');
 
     if (nameInput.value === '' || hourInput.value === '' || hourlyRateInput.value === '') {
         alert ("Preencha todos os campos!");
         return;
+    } else if (hourlyRateInput.value <= 40 && hourInput.value < 5) {
+        alert ("A quantidade de horas e o preço estão muito baixos!");
+        return;
+    } else if (hourlyRateInput.value <= 40) {
+        alert ("O preço da hora está muito baixo!");
+        return;
+    } else if (hourInput.value < 5) {
+        alert ("A quantidade de horas está muito baixa!");
+        return;
+    } 
+
+    if (urgencyInput.value === 'medium') {
+        cost += cost * 0.2;
+    } else if (urgencyInput.value === 'high') {
+        cost += cost * 0.5;
     }
 
     const task = {
         id: Date.now(),
+        urgency: urgencyInput.value,
         name: nameInput.value,
         hour: parseFloat(hourInput.value),
         cost: cost
@@ -25,8 +42,9 @@ function addTask() {
     hourInput.value = '';
     hourlyRateInput.value = '';
     tax.value = '';
+    urgencyInput.value = '';
 
-    renderTasks();
+    renderTasks();    
 }
 
 // Exiba Tarefa
@@ -37,7 +55,9 @@ function renderTasks() {
     tasks.forEach(task => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <span class="name">${task.name}</span>
+            <span id="name" class="${task.urgency}">
+                ${task.name}
+            </span>
             <div class="container">
                 <p>Tempo estimado</p>
                 <span class="time">
