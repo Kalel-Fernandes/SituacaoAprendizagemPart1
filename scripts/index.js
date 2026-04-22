@@ -37,7 +37,18 @@ function renderTasks() {
     tasks.forEach(task => {
         const li = document.createElement('li');
         li.innerHTML = `
-            <span>${task.name} - ${task.hour}h - R$ ${task.cost.toFixed(2)}</span>
+            <span class="name">${task.name}</span>
+            <div class="container">
+                <p>Tempo estimado</p>
+                <span class="time">
+                    <img src="../img/tempo.png" class="iconTime" alt="icon">
+                    ${task.hour} Horas
+                </span>
+            </div>
+            <div class="container">
+                <p>Valor estimado</p>
+                <span class="cash">R$${task.cost.toFixed(2)}</span>
+            </div>
             <button class="delete-btn" onclick="deleteTask(${task.id})">X</button>
         `;
         taskList.appendChild(li);
